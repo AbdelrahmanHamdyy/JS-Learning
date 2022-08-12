@@ -107,7 +107,7 @@ console.log(letters);
 console.log([...arr, ...arr2]); // Same result
 
 // JOIN
-console.log(letters.join(' - ')); */
+console.log(letters.join(' - '));
 
 // AT
 const arr = [23, 11, 64];
@@ -121,3 +121,21 @@ console.log(arr.at(-1)); // Better way
 
 console.log('jonas'.at(0));
 console.log('jonas'.at(-1));
+
+console.log('---- FOROF ----');
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('---- FOREACH ----'); // Cannot use break or continue
+movements.forEach(function (movement, index, arr) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}); */
