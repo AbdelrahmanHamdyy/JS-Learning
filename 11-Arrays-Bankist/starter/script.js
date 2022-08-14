@@ -193,3 +193,6 @@ const withdrawals = movements.filter(mov => mov < 0);
 console.log(movements);
 console.log(deposits);
 console.log(withdrawals); */
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance);
