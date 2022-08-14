@@ -195,10 +195,19 @@ console.log(deposits);
 console.log(withdrawals);
 
 const balance = movements.reduce((acc, cur) => acc + cur, 0);
-console.log(balance); */
+console.log(balance);
 
 const max = movements.reduce(
   (acc, mov) => (acc > mov ? acc : mov),
   movements[0]
 );
 console.log(max);
+
+const dogsAge = [5, 2, 4, 1, 15, 8, 3];
+const humanAge = dogsAge.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+const humanAgeFiltered = humanAge.filter(age => age >= 18);
+const avg = humanAgeFiltered.reduce(
+  (acc, age, i, arr) => acc + age / arr.length,
+  0
+);
+console.log(avg); */
