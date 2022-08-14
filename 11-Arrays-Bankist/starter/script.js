@@ -149,4 +149,20 @@ currencies.forEach(function (value, key, map) {
 const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 currencies.forEach(function (value, _value, set) {
   console.log(`${value}: ${_value}`);
-}); */
+});
+
+const checkDogs = (dogsJulia, dogsKate) => {
+  const Julia = dogsJulia.slice();
+  Julia.splice(0, 1);
+  Julia.splice(-2);
+  const all = Julia.concat(dogsKate);
+  console.log(all);
+  all.forEach(function (dog, i) {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+    }
+  });
+};
+checkDogs([3, 4, 1, 6, 2], [7, 8, 1, 2, 3]); */
