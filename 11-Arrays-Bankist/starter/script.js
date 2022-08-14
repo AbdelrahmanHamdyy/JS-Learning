@@ -183,4 +183,13 @@ const movementsDesc = movements.map(
   (mov, i) =>
     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
 );
-console.log(movementsDesc); */
+console.log(movementsDesc);
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(movements);
+console.log(deposits);
+console.log(withdrawals); */
