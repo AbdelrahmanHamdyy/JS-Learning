@@ -165,4 +165,22 @@ const checkDogs = (dogsJulia, dogsKate) => {
     }
   });
 };
-checkDogs([3, 4, 1, 6, 2], [7, 8, 1, 2, 3]); */
+checkDogs([3, 4, 1, 6, 2], [7, 8, 1, 2, 3]);
+
+const eurToUsd = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eurToUsd;
+// });
+
+// Using an arrow function
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsDesc = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
+);
+console.log(movementsDesc); */
