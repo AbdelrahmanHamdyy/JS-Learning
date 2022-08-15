@@ -210,7 +210,7 @@ const avg = humanAgeFiltered.reduce(
   (acc, age, i, arr) => acc + age / arr.length,
   0
 );
-console.log(avg); */
+console.log(avg);
 
 const eurToUsd = 1.1;
 const totalDepositsUSD = movements
@@ -218,3 +218,7 @@ const totalDepositsUSD = movements
   .map(mov => mov * eurToUsd)
   .reduce((acc, cur) => acc + cur, 0);
 console.log(totalDepositsUSD);
+
+const calcAverageHumanAge = ages => ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4).filter(age => age >= 18).reduce(
+  (acc, age, i, arr) => acc + age / arr.length,
+  0); */
