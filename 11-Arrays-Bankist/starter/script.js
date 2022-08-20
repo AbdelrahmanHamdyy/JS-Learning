@@ -226,3 +226,20 @@ const calcAverageHumanAge = ages => ages.map(age => (age <= 2 ? 2 * age : 16 + a
 const firstWithdrawal = movements.find(mov => mov < 0);
 const account = accounts.find(acc => acc.owner === 'Jessica Davies');
 console.log(account); */
+
+console.log(movements);
+// EQUALITY
+console.log(movements.includes(-130));
+// CONDITION (some)
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+// every
+console.log(movements.every(mov => mov > 0)); // Check if all movements are deposits
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate Callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
