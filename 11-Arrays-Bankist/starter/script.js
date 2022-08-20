@@ -225,7 +225,7 @@ const calcAverageHumanAge = ages => ages.map(age => (age <= 2 ? 2 * age : 16 + a
 
 const firstWithdrawal = movements.find(mov => mov < 0);
 const account = accounts.find(acc => acc.owner === 'Jessica Davies');
-console.log(account); */
+console.log(account);
 
 console.log(movements);
 // EQUALITY
@@ -243,3 +243,28 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); // Goes 2 level deep
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((mov, acc) => acc + mov, 0);
+// console.log(overallBalance);
+
+// Using Chaining
+const overallBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((mov, acc) => acc + mov, 0);
+console.log(overallBalance);
+
+// flatMap (Only goes 1 level deep)
+const overallBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((mov, acc) => acc + mov, 0);
+console.log(overallBalance2); */
