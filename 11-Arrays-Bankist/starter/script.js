@@ -267,4 +267,28 @@ console.log(overallBalance);
 const overallBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((mov, acc) => acc + mov, 0);
-console.log(overallBalance2); */
+console.log(overallBalance2);
+
+// Sorting
+// Function sort converts everything to string and then sorts
+
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers
+console.log(movements);
+
+// Return < 0, A, B [Keep Order]
+// Return > 0, B, A [Switch Order]
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+// Ascending
+movements.sort((a, b) => a - b);
+
+// Descending
+movements.sort((a, b) => b - a); */
