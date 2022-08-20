@@ -291,4 +291,31 @@ console.log(movements);
 movements.sort((a, b) => a - b);
 
 // Descending
-movements.sort((a, b) => b - a); */
+movements.sort((a, b) => b - a);
+
+const x = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+const arr = new Array(7); // Creates an empty array of size 7
+// We cannot call the map method on arr
+console.log(arr);
+arr.fill(1, 3, 5); // Fill 1's from position 3 to 5
+arr.fill(1);
+console.log(arr);
+
+x.fill(23, 2, 6);
+console.log(x);
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const movementsUI = Array.from(
+  document.querySelectorAll('.movements__value'),
+  el => Number(el.textContent.replace('€', ''))
+);
+console.log(movementsUI);
+
+// Using the Spread Operator
+const movementsUI2 = [...document.querySelectorAll('.movements__value')]; */
