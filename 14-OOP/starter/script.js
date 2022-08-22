@@ -32,7 +32,7 @@ console.log(me);
 
 // 1. New empty object {} is created
 // 2. Function is called, this = {}
-// 3. {} is linked to a prototype
+// 3. {} is linked to a prototype (sets proto property of the object to the prototype property of the constructor)
 // 4. function automatically returns {}
 
 const jonas = new Person('Jonas', 1991);
@@ -40,3 +40,21 @@ const jack = new Person('Jack', 1980);
 console.log(jonas, jack);
 
 console.log(jonas instanceof Person); // True
+
+// Prototypes
+console.log(Person.prototype);
+Person.prototype.calcAge = function () {
+  console.log(2022 - this.birthYear);
+};
+// Now only 1 copy of this function exists
+jonas.calcAge();
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype);
+console.log(Person.prototype.isPrototypeOf(jonas)); // True
+console.log(Person.prototype.isPrototypeOf(Person)); // False
+// .prototype => .prototypeOfLinkedObjects
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, jack.species); // Inherits the species property from the prototype
+console.log(jonas.hasOwnProperty('firstName')); // True
+console.log(jonas.hasOwnProperty('species')); // False
