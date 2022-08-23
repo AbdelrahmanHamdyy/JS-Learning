@@ -59,7 +59,22 @@ console.log(jonas.species, jack.species); // Inherits the species property from 
 console.log(jonas.hasOwnProperty('firstName')); // True
 console.log(jonas.hasOwnProperty('species')); // False
 // Person.prototype.constructor -> Person
-// Prototype of Person.prorotype is Object .prototype built from the constructor function Object()
+// Prototype of Person.prorotype is Object.prototype (Top of prototype chain) built from the constructor function Object()
 // {...} === new Object(...)
 // Prototype of Object.Prototype is null
 // Prototype Chain is similar to the scope chain
+console.log(jonas.__proto__.__proto__); // Object.prototype
+console.log(jonas.__proto__.__proto__.__proto__); // null
+console.dir(Person.prototype.constructor);
+const arr = [3, 6, 4, 4, 6, 9, 3];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__.__proto__); // Object.prototype
+
+// Adding a new method to the Array prototype
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+console.log(arr.unique());
+const h1 = document.querySelector(h1); // Prototype chain has 6/7 levels
+console.dir(x => x + 1); // Has function prototype which contains apply, call and bind
