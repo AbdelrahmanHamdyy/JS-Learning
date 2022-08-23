@@ -15,7 +15,7 @@
 
 // Constructor Functions
 // Only function declarations and expressions
-const Person = function (firstName, birthYear) {
+/*const Person = function (firstName, birthYear) {
   // Instance Properties
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -79,6 +79,7 @@ console.log(arr.unique());
 const h1 = document.querySelector(h1); // Prototype chain has 6/7 levels
 console.dir(x => x + 1); // Has function prototype which contains apply, call and bind
 
+CC#1
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -95,4 +96,33 @@ Car.prototype.brake = function () {
 };
 
 const bmw = new Car('BMW', 90);
-const mercedes = new Car('Mercedes', 90);
+const mercedes = new Car('Mercedes', 90); */
+
+// class expression
+// const PersonCl  = class()
+
+// class declaration
+class Person {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // These functions will be added to the prototype of the object
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  }
+}
+
+const jessica = new Person('Jessica', 1999);
+console.log(jessica);
+jessica.calcAge();
+console.log(jessica.__proto__ === Person.prototype);
+
+Person.prototype.greet = function () {
+  console.log(`Hey ${this.firstName}`);
+};
+jessica.greet();
+// 1. Classes are not hoisted
+// 2. Classes are first-class citizens (Passed to and returned from a function)
+// 3. Classes are exexuted in strict mode
