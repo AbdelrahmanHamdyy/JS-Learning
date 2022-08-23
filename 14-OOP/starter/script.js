@@ -103,14 +103,32 @@ const mercedes = new Car('Mercedes', 90); */
 
 // class declaration
 class Person {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
   // These functions will be added to the prototype of the object
   calcAge() {
     console.log(2022 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2022 - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert('Given name is not a full name');
+  }
+
+  get fullName() {
+    this._fullName;
   }
 }
 
@@ -126,3 +144,22 @@ jessica.greet();
 // 1. Classes are not hoisted
 // 2. Classes are first-class citizens (Passed to and returned from a function)
 // 3. Classes are exexuted in strict mode
+
+const walter = new Person('Walter', 1976); // FullName will not be recorded because the set function is called and it checks for a space
+
+const account = {
+  owner: 'jonas',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(movement) {
+    this.movements.push(movement);
+  },
+};
+
+console.log(account.latest);
+account.latest = 50;
+console.log(account);
