@@ -78,3 +78,21 @@ Array.prototype.unique = function () {
 console.log(arr.unique());
 const h1 = document.querySelector(h1); // Prototype chain has 6/7 levels
 console.dir(x => x + 1); // Has function prototype which contains apply, call and bind
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(`New Speed of ${this.make} = ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(`New Speed of ${this.make} = ${this.speed} km/h`);
+};
+
+const bmw = new Car('BMW', 90);
+const mercedes = new Car('Mercedes', 90);
