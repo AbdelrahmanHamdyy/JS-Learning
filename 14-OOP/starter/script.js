@@ -58,3 +58,8 @@ Person.prototype.species = 'Homo Sapiens';
 console.log(jonas.species, jack.species); // Inherits the species property from the prototype
 console.log(jonas.hasOwnProperty('firstName')); // True
 console.log(jonas.hasOwnProperty('species')); // False
+// Person.prototype.constructor -> Person
+// Prototype of Person.prorotype is Object .prototype built from the constructor function Object()
+// {...} === new Object(...)
+// Prototype of Object.Prototype is null
+// Prototype Chain is similar to the scope chain
