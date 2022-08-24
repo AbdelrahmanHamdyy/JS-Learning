@@ -27,6 +27,12 @@
   // We will instead use prototypes and prototypal inheritance
 };
 
+Person.hey = function() {
+    // Static method
+    console.log('Hello');
+}
+Person.hey()
+
 const me = new Person('Abdelrahman', 2002);
 console.log(me);
 
@@ -130,6 +136,12 @@ class Person {
   get fullName() {
     this._fullName;
   }
+
+  // Static Method
+  static hey() {
+    console.log('Hey there 👋');
+    console.log(this);
+  }
 }
 
 const jessica = new Person('Jessica', 1999);
@@ -163,3 +175,9 @@ const account = {
 console.log(account.latest);
 account.latest = 50;
 console.log(account);
+
+// Static methods -> Like Array.from
+console.log(Array.from(document.querySelectorAll('h1')));
+console.log(Number.parseFloat(12));
+
+Person.hey();
