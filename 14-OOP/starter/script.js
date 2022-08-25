@@ -271,7 +271,7 @@ console.log(mike instanceof Person);
 console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor); */
+console.dir(Student.prototype.constructor);
 
 const Car = function (make, speed) {
   this.make = make;
@@ -305,4 +305,60 @@ EV.prototype.accelerate = function () {
   console.log(
     `${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}`
   );
-};
+}; */
+
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // These functions will be added to the prototype of the object
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2022 - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert('Given name is not a full name');
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static Method
+  static hey() {
+    console.log('Hey there 👋');
+    console.log(this);
+  }
+}
+
+class Student extends Person {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear); // Always needs to happen first
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  calcAge() {
+    console.log('OVERRIDEN');
+    console.log(`Age: ${2022 - this.birthYear}`);
+  }
+}
+
+const martha = new Student('Martha Jones', 2002, 'CS');
+martha.introduce();
+martha.calcAge();
