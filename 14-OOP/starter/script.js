@@ -237,7 +237,7 @@ ford.accelerate();
 ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
-console.log(ford); */
+console.log(ford);
 
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
@@ -271,4 +271,38 @@ console.log(mike instanceof Person);
 console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor);
+console.dir(Student.prototype.constructor); */
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(`New Speed of ${this.make} = ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(`New Speed of ${this.make} = ${this.speed} km/h`);
+};
+
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (changeTo) {
+  this.charge = changeTo;
+};
+
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}`
+  );
+};
