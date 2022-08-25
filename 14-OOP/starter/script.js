@@ -305,7 +305,7 @@ EV.prototype.accelerate = function () {
   console.log(
     `${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}`
   );
-}; */
+};
 
 class Person {
   constructor(fullName, birthYear) {
@@ -361,4 +361,32 @@ class Student extends Person {
 
 const martha = new Student('Martha Jones', 2002, 'CS');
 martha.introduce();
-martha.calcAge();
+martha.calcAge(); */
+
+const PersonProto = {
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2005, 'CE');
+jay.introduce();
+jay.calcAge();
