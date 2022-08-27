@@ -361,7 +361,7 @@ class Student extends Person {
 
 const martha = new Student('Martha Jones', 2002, 'CS');
 martha.introduce();
-martha.calcAge(); */
+martha.calcAge();
 
 const PersonProto = {
   calcAge() {
@@ -389,4 +389,4 @@ StudentProto.introduce = function () {
 const jay = Object.create(StudentProto);
 jay.init('Jay', 2005, 'CE');
 jay.introduce();
-jay.calcAge();
+jay.calcAge(); */
