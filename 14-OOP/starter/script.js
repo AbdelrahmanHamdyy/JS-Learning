@@ -390,35 +390,55 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2005, 'CE');
 jay.introduce();
 jay.calcAge(); */
+
+// Public Fields
+// Private Fields
+// Public methods
+// Private methods
+// There is also the static version
 class Account {
+  // 1) Public fields (They are in the instances of the class not the prototype)
+  locale = navigator.language;
+
+  // 2) Private fields (#)
+  #movements = [];
+  #pin; // Undefined
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
-    this.locale = navigator.language;
+    // Protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
     console.log(`Thanks for opening an account, ${owner}`);
   }
+  // 3) Public methods
 
   // Public Interface
+  getMovements() {
+    return this.#movements;
+  }
+
   deposit(val) {
-    this.movements.push(val);
+    this.#movements.push(val);
   }
 
   withdraw(val) {
     this.deposit(-val);
   }
 
-  approveLoan(val) {
-    return true;
-  }
-
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this.#approveLoan(val)) {
       this.deposit(val);
       console.log('Loan Approved');
     }
   }
+
+  // 4) Private methods
+  #approveLoan(val) {
+    return true;
+  } // THE BROWSER DOESNT SUPPORT THIS, It sees it as a private class field not a method
 }
 
 const acc1 = new Account('Jonas', 'EUR', 1111);
