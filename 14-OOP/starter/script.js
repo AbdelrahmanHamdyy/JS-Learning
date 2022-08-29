@@ -422,10 +422,12 @@ class Account {
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   requestLoan(val) {
@@ -433,6 +435,7 @@ class Account {
       this.deposit(val);
       console.log('Loan Approved');
     }
+    return this;
   }
 
   // 4) Private methods
@@ -447,3 +450,7 @@ acc1.deposit(250);
 acc1.withdraw(140);
 acc1.requestLoan(1000);
 console.log(acc1);
+
+// Chaining
+acc1.deposit(500).deposit(300).withdraw(35).requestLoan(2500);
+// Just return this for it to work
