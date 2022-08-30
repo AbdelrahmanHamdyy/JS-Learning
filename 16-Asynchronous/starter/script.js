@@ -99,17 +99,29 @@ const getCountryAndNeighbour = function (country) {
   });
 };
 
-getCountryAndNeighbour('egypt');
+// getCountryAndNeighbour('egypt');
 // A lot of nested callbacks -> Callback hell
-setTimeout(() => {
-  console.log('1 sec');
-  setTimeout(() => {
-    console.log('2 sec');
-    setTimeout(() => {
-      console.log('3 sec');
-      setTimeout(() => {
-        console.log('4 sec');
-      }, 1000);
-    }, 1000);
-  }, 1000);
-}, 1000);
+// setTimeout(() => {
+//   console.log('1 sec');
+//   setTimeout(() => {
+//     console.log('2 sec');
+//     setTimeout(() => {
+//       console.log('3 sec');
+//       setTimeout(() => {
+//         console.log('4 sec');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+// const request = new XMLHttpRequest();
+// request.open('GET', `https://restcountries.com/v2/name/${country}`);
+// request.send();
+
+const request = fetch('https://restcountries.com/v2/name/portugal');
+console.log(request);
+// A promise is an object that is used as a placeholder for the future result of an asynchronous operation
+
+// Promise Lifecycle
+// PENDING ----ASYNC TASK-----> SETTLED (Fulfilled/Rejected)
+// Fetch function builds promises and returns it for us to consume it
