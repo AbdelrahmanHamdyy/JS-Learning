@@ -1,3 +1,5 @@
+'use strict';
+
 ///////////////////////////////////////
 // Synchronous code is executed line by line
 // Each line of code waits for previous line to finish
@@ -33,33 +35,35 @@
 First of all the url we are trying to communicate with is sent to the DNS for lookup which means it returns it to the client in a new form (Containing the IP address and the port number). Then a TCP/IP connection is established between the client and the web server which opens a socket that stays open for the whole transmission process. Its purpose is to break the date sent or recieved to small data packets for quicker conversion and the IP then sends and routes these packets accross the connection line (internet) to the client once again. Next, An HTTP request is sent from the client containing the HTTP method (GET/POST/...), the request target, and the HTTP version with a request body if the method is POST. Then an HTTP response is sent back containing the HTTP version, a status code and a status message along with the headers and the response body containing the details sent back. Index.html/JS/CSS are loaded using these requests (multiple at a time) Process is repeated for each file.
 */
 
-'use strict';
-
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-//////////////////////////////////////////
 const renderCountry = function (data, className = '') {
   const html = `
-      <article class="country ${className}">
-          <img class="country__img" src="${data.flag}" />
-          <div class="country__data">
-          <h3 class="country__name">${data.name}</h3>
-          <h4 class="country__region">${data.region}</h4>
-          <p class="country__row"><span>👫</span>${(
-            +data.population / 1000000
-          ).toFixed(1)} people</p>
-          <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-          <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-          </div>
-      </article>
-    `;
+        <article class="country ${className}">
+            <img class="country__img" src="${data.flag}" />
+            <div class="country__data">
+            <h3 class="country__name">${data.name}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${(
+              +data.population / 1000000
+            ).toFixed(1)} people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${
+              data.currencies[0].name
+            }</p>
+            </div>
+        </article>
+      `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
 };
 
 const renderError = function (msg) {
   countriesContainer.insertAdjacentHTML('beforeend', msg);
 };
+
+/*
+//////////////////////////////////////////
 
 const getCountryData = function (country) {
   const request = new XMLHttpRequest();
@@ -189,4 +193,29 @@ btn.addEventListener('click', function () {
 });
 // then returns the success value of the promise
 // Promises do not get rid of callbacks but of callback hell
-getCountry('NOTFOUND');
+getCountry('NOTFOUND'); */
+
+// CC#1
+// const whereAmI = function (lat, long) {
+//   fetch(`https://geocode.xyz/${lat},${long}?geoit=json`)
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Problem with geocoding ${response.status}`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(`You are in ${data.city}, ${data.country}`);
+//       return fetch(`https://restcountries.com/v2/name/${data.country}`);
+//     })
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => console.error(`--${err.message}--`))
+//     .finally(() => (countriesContainer.style.opacity = 1));
+// };
+
+// whereAmI(52.508, 13.381);
