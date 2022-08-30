@@ -219,3 +219,14 @@ getCountry('NOTFOUND'); */
 // };
 
 // whereAmI(52.508, 13.381);
+// Async tasks run in the WEB APIs environment of the browser
+// Callbacks of promises have a special queue called Microtasks queue which has a higher priority than the regular Callback queue
+
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// Promise.resolve('Resolved promise 2').then(res => {
+//   for (let i = 0; i < 1000000; i++) {}
+//   console.log(res);
+// });
+// console.log('Test end');
