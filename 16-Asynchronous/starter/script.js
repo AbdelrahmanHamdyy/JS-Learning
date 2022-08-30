@@ -55,7 +55,10 @@ const renderCountry = function (data, className = '') {
       </article>
     `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentHTML('beforeend', msg);
 };
 
 const getCountryData = function (country) {
@@ -126,19 +129,64 @@ console.log(request);
 // PENDING ----ASYNC TASK-----> SETTLED (Fulfilled/Rejected)
 // Fetch function builds promises and returns it for us to consume it
 
+const getJSON = function (url. errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`); // Equivalent to rejecting a promise
+    return response.json();
+  });
+};
+
 const getCountry = function (country) {
   // In the beginning, promise is pending. However, let's assume success
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(response => response.json()) // Async function (Promise)
+  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
-      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+      if (!neighbour) throw new Error('No neighbour found!');
+      return getJSON(`https://restcountries.com/v2/alpha/${neighbour}`, 'Country not found');
     })
-    .then(response => response.json())
-    .then(data => renderCountry(data, 'neighbour'));
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => {
+      console.error(`${err} 💥💥💥`);
+      renderError(`Something went wrong ⚠ ${err.message}. Try Again!`);
+    })
+    .finally(() => {
+      // Called whether promise fulfilled/rejected
+      countriesContainer.style.opacity = 1;
+    });
+  // Errors propagate down the chain until they are caught
 };
 
-getCountry('portugal');
+// const getCountry = function (country) {
+// // In the beginning, promise is pending. However, let's assume success
+// fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(response => {
+//     console.log(response);
+//     if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`); // Equivalent to rejecting a promise
+//     return response.json();
+//     }) // Async function (Promise)
+//     .then(data => {
+//     renderCountry(data[0]);
+//     const neighbour = data[0].borders?.[0];
+//     return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+//     })
+//     .then(response => response.json())
+//     .then(data => renderCountry(data, 'neighbour'))
+//     .catch(err => {
+//     console.error(`${err} 💥💥💥`);
+//     renderError(`Something went wrong ⚠ ${err.message}. Try Again!`);
+//     })
+//     .finally(() => {
+//     // Called whether promise fulfilled/rejected
+//     countriesContainer.style.opacity = 1;
+//     });
+// // Errors propagate down the chain until they are caught
+// };
+// The only way that a fetch promise rejects is when the user loses internet connection
+btn.addEventListener('click', function () {
+  getCountry('portugal');
+});
 // then returns the success value of the promise
 // Promises do not get rid of callbacks but of callback hell
+getCountry('NOTFOUND');
