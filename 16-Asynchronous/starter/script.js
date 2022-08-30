@@ -125,3 +125,12 @@ console.log(request);
 // Promise Lifecycle
 // PENDING ----ASYNC TASK-----> SETTLED (Fulfilled/Rejected)
 // Fetch function builds promises and returns it for us to consume it
+
+const getCountry = function (country) {
+  // In the beginning, promise is pending. However, let's assume success
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(response => response.json()) // Async function (Promise)
+    .then(data => renderCountry(data[0]));
+};
+getCountry('portugal');
+// Promises do not get rid of callbacks but of callback hell
