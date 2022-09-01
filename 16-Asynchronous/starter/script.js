@@ -56,10 +56,12 @@ const renderCountry = function (data, className = '') {
         </article>
       `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
 };
 
 const renderError = function (msg) {
   countriesContainer.insertAdjacentHTML('beforeend', msg);
+  countriesContainer.style.opacity = 1;
 };
 
 /*
@@ -311,7 +313,7 @@ const whereAmI = function () {
 
 btn.addEventListener('click', whereAmI); */
 
-// CC#2
+/* CC#2
 const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
@@ -352,3 +354,42 @@ createImage('img/img-1.jpg')
     currImg.style.display = 'none';
   })
   .catch(err => console.error(err));
+*/
+
+// Asyn-Await: A simpler and easier way to consume promises
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    // Reverse geocoding
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+    const dataGeo = await resGeo.json();
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.country}`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting country');
+    const data = await res.json();
+    renderCountry(data[0]);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError(`💥 ${err.message}`);
+
+    // Reject promise returned from async function
+    throw err;
+  }
+};
+btn.addEventListener('click', whereAmI);
