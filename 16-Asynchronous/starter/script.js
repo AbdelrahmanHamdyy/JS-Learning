@@ -271,7 +271,7 @@ Promise.reject(new Error('abc')).catch(x => console.error(x)); */
 // console.log('Getting Position');
 
 // PROMISIFYING GEOLOCATION
-
+/*
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     // navigator.geolocation.getCurrentPosition(
@@ -309,4 +309,46 @@ const whereAmI = function () {
     .finally(() => (countriesContainer.style.opacity = 1));
 };
 
-btn.addEventListener('click', whereAmI);
+btn.addEventListener('click', whereAmI); */
+
+// CC#2
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const images = document.querySelector('.images');
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+    img.addEventListener('load', function () {
+      images.append(img);
+      resolve(img);
+    });
+    img.addEventListener('error', function () {
+      reject(new Error('Image not found!'));
+    });
+  });
+};
+
+let currImg;
+
+createImage('img/img-1.jpg')
+  .then(img => {
+    currImg = img;
+    return wait(2);
+  })
+  .then(() => {
+    currImg.style.display = 'none';
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    currImg = img;
+    return wait(2);
+  })
+  .then(() => {
+    currImg.style.display = 'none';
+  })
+  .catch(err => console.error(err));
