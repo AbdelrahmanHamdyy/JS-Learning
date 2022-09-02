@@ -392,4 +392,21 @@ const whereAmI = async function () {
     throw err;
   }
 };
-btn.addEventListener('click', whereAmI);
+
+console.log('1: Will get location');
+// const city = whereAmI();
+// console.log(city);
+whereAmI()
+  .then(city => console.log(`2: ${city}`))
+  .catch(err => console.error(`2: ${err.message} ✨`))
+  .finally(() => console.log('3: Finished'));
+
+(async function () {
+  try {
+    const loc = await whereAmI();
+    console.log(`2: ${loc}`);
+  } catch (err) {
+    console.error(`2: ${err.message} ✨`);
+  }
+  console.log('3: Finished');
+})();
