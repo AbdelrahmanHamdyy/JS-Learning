@@ -19,3 +19,24 @@ add('cheese', 4);
 
 console.log(cart);
 // imports and exports have a live connection
+
+// Top-level Await
+// Now blocks the entire execution of the module
+// const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+// const data = await res.json();
+// console.log(data);
+
+const getLastPost = async function () {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const data = await res.json();
+  console.log(data);
+
+  return { title: data.at(-1).title, text: data.at(-1).body };
+};
+
+const lastPost = getLastPost();
+// Not very clean
+// lastPost.then(res => console.log(res));
+
+const lastPost2 = await getLastPost();
+console.log(lastPost2);
