@@ -12,7 +12,10 @@ console.log('Importing Module');
 // console.log(price);
 
 // Importing default exports
-import add from './shoppingCart.js';
+import add, { cart } from './shoppingCart.js';
 add('pizza', 2);
+add('bread', 5);
+add('cheese', 4);
 
+console.log(cart);
 // imports and exports have a live connection
