@@ -77,3 +77,23 @@ console.log(ShoppingCart2.shippingCost);
 // };
 
 // const {addToCart} = require('./shoppingCart.js');
+
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+
+const stateClone = Object.assign({}, state);
+console.log(stateClone);
+
+const stateDeepClone = cloneDeep(state);
+state.user.loggedIn = false;
+console.log(stateDeepClone);
+
+// Never include the node modules folder elsewhere
+// npm i installs all packages in the package.json file
