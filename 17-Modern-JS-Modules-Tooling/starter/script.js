@@ -78,7 +78,9 @@ console.log(ShoppingCart2.shippingCost);
 
 // const {addToCart} = require('./shoppingCart.js');
 
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from 'lodash-es';
+import cloneDeep from 'lodash-es';
 
 const state = {
   cart: [
@@ -97,3 +99,7 @@ console.log(stateDeepClone);
 
 // Never include the node modules folder elsewhere
 // npm i installs all packages in the package.json file
+
+if (module.hot) {
+  module.hot.accept();
+}
